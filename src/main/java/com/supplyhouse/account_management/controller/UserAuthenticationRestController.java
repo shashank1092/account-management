@@ -49,7 +49,8 @@ public class UserAuthenticationRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Account created successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseAccountDto.class))}),
-            @ApiResponse(responseCode = "400", description = "Invalid input data", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Invalid input data", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<ResponseAccountDto> registerAccount(@RequestBody @Validated  RequestAccountDto requestAccountDto) {
         ResponseAccountDto responseDto = userAccountService.registerAccount(requestAccountDto);
@@ -61,7 +62,8 @@ public class UserAuthenticationRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully authenticated",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Map.class))}),
-            @ApiResponse(responseCode = "401", description = "Invalid username or password", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Bad credentials, Invalid username or password", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<Map<String,String>> loginAccount(@RequestBody @Validated LoginRequestDto loginRequestDto) {
         //UserDetails userDetails = userAccountService.loadUserByUsername(loginRequestDto.getUserName());

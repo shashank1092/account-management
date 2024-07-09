@@ -35,7 +35,8 @@ public class OrderRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Order fetched successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseOrderDto.class))}),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<ResponseOrderDto> getOrderById(@PathVariable @NotNull Long id) {
         ResponseOrderDto ordersForIndividualAccount = orderService.getOrderById(id);
@@ -48,7 +49,8 @@ public class OrderRestController {
             @ApiResponse(responseCode = "201", description = "Order placed successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseOrderDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid input data", content = @Content),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<ResponseOrderDto> placeNewOrder(@RequestBody @Validated RequestOrderDto requestOrderDto) {
         ResponseOrderDto responseDto = orderService.createOrder(requestOrderDto);
@@ -60,7 +62,8 @@ public class OrderRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Orders fetched successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseOrderDto.class))}),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<List<ResponseOrderDto>> getAllOrders() throws AccountNotFoundException {
         List<ResponseOrderDto> ordersForIndividualAccount = orderService.getAllOrdersForLoggedInUser();

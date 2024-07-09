@@ -41,7 +41,8 @@ public class UserAccountRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Account fetched successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseAccountDto.class))}),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<ResponseAccountDto> getAccountById(@PathVariable @NotNull Long id) throws AccountNotFoundException {
         ResponseAccountDto responseAccountDto = userAccountService.getAccountDtoById(id);
@@ -54,7 +55,8 @@ public class UserAccountRestController {
             @ApiResponse(responseCode = "200", description = "Account upgraded to a business owner account successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseAccountDto.class))}),
             @ApiResponse(responseCode = "400", description = "Account is not eligible for upgrade", content = @Content),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<ResponseAccountDto> upgradeToBusinessOwnerAccount(@PathVariable @NotNull Long accountId) throws OperationNotAllowedException, AccountNotFoundException {
         ResponseAccountDto responseDto = userAccountService.upgradeToBusinessOwnerAccount(accountId);
@@ -66,7 +68,8 @@ public class UserAccountRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Account fetched successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseAccountDto.class))}),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<List<ResponseAccountDto>> getAllIndividualAccounts() {
         List<ResponseAccountDto> responseAccountDtoList = userAccountService.getAllIndividualAccounts();
@@ -79,7 +82,8 @@ public class UserAccountRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Invitation sent successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseAccountDto.class))}),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<InvitationResponseDto> inviteAccountToLinkToBusinessAccount(@PathVariable @NotNull Long accountId) throws AccountNotFoundException {
         InvitationResponseDto responseDto = invitationService.inviteAccountToLinkToBusinessAccount(accountId);
@@ -92,7 +96,8 @@ public class UserAccountRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Account linked to Business Account successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseAccountDto.class))}),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<InvitationResponseDto> acceptOrRejectInvitation(@RequestBody InvitationActionDto invitationActionDto) throws AccountNotFoundException {
         InvitationResponseDto responseDto = invitationService.acceptOrRejectInvitation(invitationActionDto);
@@ -106,7 +111,8 @@ public class UserAccountRestController {
             @ApiResponse(responseCode = "200", description = "Account de linked from a business owner account successfully",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseAccountDto.class))}),
             @ApiResponse(responseCode = "400", description = "Account is not eligible for de link", content = @Content),
-            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content)
+            @ApiResponse(responseCode = "401", description = "Unauthorised", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
     })
     public ResponseEntity<ResponseAccountDto> deLinkSubAccountFromBusinessOwnerAccount(@PathVariable @NotNull Long subAccountId) throws OperationNotAllowedException, AccountNotFoundException {
         ResponseAccountDto responseDto = userAccountService.deLinkSubAccountFromBusinessOwnerAccount(subAccountId);
