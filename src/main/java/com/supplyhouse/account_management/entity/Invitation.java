@@ -19,24 +19,24 @@ public class Invitation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long invitationId;
 
-    @Column(name = "business_owner_account_id", nullable = false)
+    @Column(name = "BUSINESS_OWNER_ACCOUNT_ID", nullable = false)
     private Long businessOwnerAccountId;
 
-    @Column(name = "individual_account_id", nullable = false)
+    @Column(name = "INDIVIDUAL_ACCOUNT_ID", nullable = false)
     private Long individualAccountId;
 
     @Column(name = "INVITATION_STATUS")
     @Enumerated(EnumType.STRING)
     private InvitationStatus invitationStatus;
 
-    @Column(name = "share_historical_data")
+    @Column(name = "SHARE_HISTORICAL_DATA")
     private Boolean shareHistoricalData;
 
     @Column(name = "CREATION_DATE", nullable = false,updatable = false)
     @CreationTimestamp
     private LocalDateTime creationDate;
 
-    @Column(name = "action_performed_date", nullable = false, updatable = true)
+    @Column(name = "ACTION_PERFORMED_DATE", nullable = false)
     @CreationTimestamp
     private LocalDateTime actionPerformedDate;
 
